@@ -4,8 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,6 +21,7 @@ public class AmazonTest {
     FilterResultPage filterResultPage;
 
     @BeforeTest
+
     public void setup() {
         String log4jConfPath = "src/main/resources/log4j.properties";
         PropertyConfigurator.configure(log4jConfPath);
@@ -30,6 +30,7 @@ public class AmazonTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(SITEURL);
+        LOGGER.info("Start tests");
     }
 
     @Test
@@ -38,6 +39,7 @@ public class AmazonTest {
         signInFormPage = new SignInFormPage(driver);
         homePage.clickSignInBtn();
         signInFormPage.verifyHeader();
+        signInFormPage.clickHomeBtn();
     }
 
     @Test
@@ -45,21 +47,22 @@ public class AmazonTest {
         homePage = new HomePage(driver);
         homePage.clickSearchField();
         homePage.inputTextInSearchField();
-        homePage.clickSearchIcon();
         resultsPage = new ResultsPage(driver);
         resultsPage.verifyItemPresent();
         resultsPage.clickHomeBtn();
         homePage.verifyHomePageIsOpen();
     }
 
+//    @Test(retryAnalyzer = Retry.class)
     @Test
     public void verifyTodayDealsOption() {
         homePage = new HomePage(driver);
-        homePage.closeLocationPopUp();
+        homePage.closeLocationPopUpIfPresence();
         homePage.clickTodaysDealsBtn();
         todaysDealPage = new TodaysDealPage(driver);
         todaysDealPage.verifyTDPageIsOpen();
         todaysDealPage.verifyAllGoodsHaveDiscount();
+        todaysDealPage.clickHomeBtn();
     }
 
     @Test
@@ -74,10 +77,11 @@ public class AmazonTest {
         filterResultPage = new FilterResultPage(driver);
         filterResultPage.verifyTitleOnFilterResultPage();
         filterResultPage.verifyGoodsAreOk();
+        filterResultPage.clickHomeBtn();
     }
 
     @Test
-    public void verifyFilterMenuCloseBtn(){
+    public void verifyFilterMenuCloseBtn() {
         homePage = new HomePage(driver);
         homePage.clickFilterMenuBtn();
         filterMenuPage = new FilterMenuPage(driver);
@@ -85,5 +89,11 @@ public class AmazonTest {
         filterMenuPage.clickCloseBtn();
         homePage = new HomePage(driver);
         homePage.verifyHomePageIsOpen();
+    }
+
+    @AfterTest
+    public void setUpClose() {
+        LOGGER.info("Tests finished");
+        driver.quit();
     }
 }

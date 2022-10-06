@@ -1,5 +1,6 @@
 package amazon;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,8 +9,10 @@ import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
-public class FilterMenuPage {
-    WebDriver driver;
+public class FilterMenuPage extends AbstractPage{
+
+    private static final Logger LOGGER = Logger.getLogger(FilterMenuPage.class);
+
 
     @FindBy(xpath = "//div[text()='Smart Home']")
     WebElement smartHomeBtn;
@@ -26,32 +29,37 @@ public class FilterMenuPage {
     @FindBy(xpath = "//*[@id=\"hmenu-content\"]/ul[7]/li[2]/div")
     WebElement smartHomeTitle;
 
+
     public FilterMenuPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver,this);
     }
 
     public void clickSmartHomeBtn(){
-        smartHomeBtn.click();
+        clickButton(smartHomeBtn);
     }
 
     public void clickPetBtn(){
-        petBtn.click();
+        clickButton(petBtn);
     }
 
     public void verifyFilterMenuCloseBtnPresent(){
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        boolean isFilterBlockMenuPresent = filterBlock.isDisplayed();
-        Assert.assertTrue(isFilterBlockMenuPresent);
+        LOGGER.info("Verifying Filter-Menu Close-Btn Presence");
+        boolean isFilterBlockMenuPresent = filterBlock.isDisplayed() || smartHomeTitle.isDisplayed();
+        Assert.assertTrue(isFilterBlockMenuPresent, " No filter menu is displayed on the screen");
+        boolean isCloseFMBtnPresent = closeFilterMenuBtn.isDisplayed();
+        Assert.assertTrue(isCloseFMBtnPresent,"No filter-menu close btn present on the screen");
     }
 
     public void verifySmartTitlePresent(){
+        LOGGER.info("Verifying 'Smart Home' Presence on title of page");
         boolean isSmartHomeTitleDisplayed = smartHomeTitle.isDisplayed();
-        Assert.assertTrue(isSmartHomeTitleDisplayed);
+        Assert.assertTrue(isSmartHomeTitleDisplayed, "No 'Smart Home' title is displayed");
     }
 
     public void clickCloseBtn(){
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        closeFilterMenuBtn.click();
+        clickButton(closeFilterMenuBtn);
     }
 }

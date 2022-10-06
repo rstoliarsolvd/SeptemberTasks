@@ -1,5 +1,6 @@
 package amazon;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,17 +15,21 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class TodaysDealPage {
-    WebDriver driver;
+public class TodaysDealPage extends AbstractPage{
+    private static final Logger LOGGER = Logger.getLogger(TodaysDealPage.class);
+
 
     @FindBy(xpath = "//h1")
     WebElement title;
 
-    @FindBy(xpath = "//*[contains(@class, 'Grid-module__gridDisplayGrid_2X7cDTY7pjoTwwvSRQbt9Y')]//*[contains(@class, 'BadgeAutomatedLabelApex-module__light_2LF3B5hTU7wYCGMizFqBvg')]")
+    @FindBy(xpath = "//div[@class='Grid-module__gridDisplayGrid_2X7cDTY7pjoTwwvSRQbt9Y']//div//div//div//div//div//div[@style='color: rgb(204, 12, 57);']")
     List<WebElement> discountGoods;
 
+    @FindBy(id = "nav-logo-sprites")
+    WebElement homeBtn;
+
     public TodaysDealPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 
@@ -34,22 +39,30 @@ public class TodaysDealPage {
     }
 
     public void verifyAllGoodsHaveDiscount() {
+        LOGGER.info("Verifying that all goods have at least one feature of discount");
         SoftAssert softAssert = new SoftAssert();
         List<String> discGoods = discountGoods.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
-        List<String> discounts = new ArrayList<>(Arrays.asList("up", "-", "%", "off", "under"));
+        List<String> discounts = new ArrayList<>(Arrays.asList("up", "%", "off", "under", "-"));
         for (int i = 0; i < 8; i++) {
             boolean haveDiscount = false;
             for (int j = 0; j < discounts.size(); j++) {
                 String a = discGoods.get(i).toLowerCase(Locale.ROOT);
-                if (a.contains(discounts.get(j))) {
+                String signdisc = discounts.get(j);
+                if (!a.contains(signdisc)) {
+                    continue;
+                } else {
                     haveDiscount = true;
-                    break;
-                }
-                softAssert.assertTrue(haveDiscount);
             }
+            softAssert.assertTrue(haveDiscount,"No discount on goods");
         }
+    }
         softAssert.assertAll();
+}
+
+    public void clickHomeBtn(){
+        clickButton(homeBtn);
+        LOGGER.info("Home btn is clicked");
     }
 }
