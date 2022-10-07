@@ -3,6 +3,7 @@ package amazon;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -30,7 +31,7 @@ public class FilterMenuPage extends AbstractPage{
     WebElement smartHomeTitle;
 
 
-    public FilterMenuPage(WebDriver driver){
+    public FilterMenuPage(RemoteWebDriver driver){
         super(driver);
         PageFactory.initElements(driver,this);
     }

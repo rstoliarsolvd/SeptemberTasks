@@ -1,17 +1,26 @@
 import amazon.*;
+//import org.apache.log4j.PropertyConfigurator;
+//import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class AmazonTest {
-    WebDriver driver;
 
-    private static final Logger LOGGER = LogManager.getLogger(AmazonTest.class);
+    public RemoteWebDriver driver = null;  //For Selenium Standalone server
+
+//    WebDriver driver;  //For Selenium server
+
+    private static final Logger LOGGER = Logger.getLogger(AmazonTest.class);
     private static final String SITEURL = "https://www.amazon.com/";
     HomePage homePage;
     SignInFormPage signInFormPage;
@@ -26,8 +35,21 @@ public class AmazonTest {
         String log4jConfPath = "src/main/resources/log4j.properties";
         PropertyConfigurator.configure(log4jConfPath);
 
-        System.setProperty("webdriver.chrome.driver", "/Users/rstoliar/Downloads/chromedriver 2");
-        driver = new ChromeDriver();
+//For Selenium Standalone server
+        ChromeOptions options = new ChromeOptions();
+        options.setAcceptInsecureCerts(true);
+        options.setCapability(CapabilityType.BROWSER_NAME,"chrome");
+        try {
+//            driver = new RemoteWebDriver(new URL("http://localhost:4444"),options);
+            driver = new RemoteWebDriver(new URL("http://192.168.0.124:4444"),options);
+        } catch (MalformedURLException e) {
+            LOGGER.info("Invalid grid URL");
+        }catch (Exception e){
+            LOGGER.info(e.getMessage());
+        }
+//For Selenium Standalone server and for Selenium  server
+//        System.setProperty("webdriver.chrome.driver", "/Users/rstoliar/Downloads/chromedriver 2");
+//        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(SITEURL);
         LOGGER.info("Start tests");

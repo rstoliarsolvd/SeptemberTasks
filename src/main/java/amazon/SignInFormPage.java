@@ -3,6 +3,7 @@ package amazon;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -23,7 +24,7 @@ public class SignInFormPage extends AbstractPage {
     @FindBy(xpath = "//*[@aria-label='Amazon']")
     WebElement homeBtn1;
 
-    public SignInFormPage(WebDriver driver) {
+    public SignInFormPage(RemoteWebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }

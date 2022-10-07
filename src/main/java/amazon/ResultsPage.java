@@ -3,6 +3,7 @@ package amazon;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,7 +24,7 @@ public class ResultsPage extends AbstractPage{
     @FindBy(id = "nav-logo-sprites")
     WebElement homeBtn;
 
-    public ResultsPage(WebDriver driver) {
+    public ResultsPage(RemoteWebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
