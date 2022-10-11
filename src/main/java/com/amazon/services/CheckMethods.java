@@ -1,13 +1,19 @@
 package com.amazon.services;
 
 import com.amazon.AbstractPage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 import java.util.Locale;
 
 public class CheckMethods extends AbstractPage {
+
+    @FindBy(xpath = "//*[@id='nav-main']")
+    private static WebElement menuTab;
 
     public CheckMethods(RemoteWebDriver driver) {
         super(driver);
@@ -16,6 +22,7 @@ public class CheckMethods extends AbstractPage {
 
     /**
      * Verifying if Any element of 'whatList' present in All elements of 'whereList' up to element number 'numElementsToCheck'
+     *
      * @param whereList
      * @param numElementsToCheck
      * @param whatList
@@ -43,6 +50,7 @@ public class CheckMethods extends AbstractPage {
 
     /**
      * Verifying if element 'whatS' present in All elements of 'whereList'
+     *
      * @param whereList
      * @param whatS
      * @return
@@ -62,6 +70,7 @@ public class CheckMethods extends AbstractPage {
 
     /**
      * Verifying if ALL element of 'whatArr' present in All elements of 'whereList'
+     *
      * @param whereList
      * @param whatArr
      * @return
@@ -82,4 +91,7 @@ public class CheckMethods extends AbstractPage {
         return whereListContainWhatArrEl;
     }
 
+    public boolean isWrongDesign() {
+        return driver.findElements(By.xpath("//*[@id='nav-main']")).size() < 1;
+    }
 }

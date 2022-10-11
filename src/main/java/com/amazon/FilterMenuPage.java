@@ -24,7 +24,8 @@ public class FilterMenuPage extends AbstractPage{
     @FindBy(xpath = "//div[@class ='nav-sprite hmenu-close-icon']")
     private WebElement closeFilterMenuBtn;
 
-    @FindBy(xpath = "//*[@id='hmenu-content']")
+//    @FindBy(xpath = "//*[@id='hmenu-content']")
+    @FindBy(xpath = "//ul[@class='hmenu hmenu-visible']")
     private WebElement filterBlock;
 
     @FindBy(xpath = "//*[@id='hmenu-content']//following::div[contains(text(),'smart home')]")
@@ -41,7 +42,6 @@ public class FilterMenuPage extends AbstractPage{
     public FilterMenuPage clickSmartHomeBtn(){
         clickButton(smartHomeBtn,"smartHomeBtn");
         new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(smartHomeTitle));
-
         return new FilterMenuPage(driver);
     }
 
@@ -52,7 +52,7 @@ public class FilterMenuPage extends AbstractPage{
     }
 
     public boolean isFMPageOpen(){
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(filterBlock));
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(closeFilterMenuBtn));
         return closeFilterMenuBtn.isDisplayed() || filterBlock.isDisplayed();
     }
 
@@ -65,7 +65,8 @@ public class FilterMenuPage extends AbstractPage{
     public HomePage clickCloseBtn(){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         clickButton(closeFilterMenuBtn,"closeFilterMenuBtn");
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.invisibilityOf(filterBlock));
+        new WebDriverWait(driver, Duration.ofSeconds(9)).until(ExpectedConditions.invisibilityOf(closeFilterMenuBtn));
+//        new WebDriverWait(driver, Duration.ofSeconds(9)).until(ExpectedConditions.invisibilityOf(filterBlock));
         return new HomePage(driver);
     }
 }

@@ -7,7 +7,7 @@
 <!--    <test name="/Users/rstoliar/IdeaProjects/SeptemberTasks/src/main/java/amazon">-->
 
         <classes>
-            <class name="AmazonTest">
+            <class name="com.amazon.AmazonTest">
 <!--                <methods>-->
 <!--                    <include name="verifyTodayDealsOption"/>-->
 <!--                </methods>-->

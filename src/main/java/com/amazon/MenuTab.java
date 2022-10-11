@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MenuTab extends AbstractPage {
+
     @FindBy(xpath = "//*[@id='nav-xshop']//a[1]")
     private WebElement todaysDealsBtn;
 
