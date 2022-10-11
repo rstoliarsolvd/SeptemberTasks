@@ -24,12 +24,6 @@ public class UpTab extends AbstractPage {
     @FindBy(xpath = "//div[@class='a-box-inner a-padding-extra-large']")
     private WebElement signInBlock;
 
-//    @FindBy(id = "nav-search-submit-button")
-//    private WebElement searchIcon;
-
-//    @FindBy(id = "nav-logo-sprites")
-//    private WebElement homeBtn;
-
     public UpTab(RemoteWebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
