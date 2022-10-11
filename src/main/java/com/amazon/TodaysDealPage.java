@@ -50,5 +50,4 @@ public class TodaysDealPage extends AbstractPage{
 
         return CheckMethods.isElementsPresentInList(discGoods,8,discounts);
     }
-
 }

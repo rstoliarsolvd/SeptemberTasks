@@ -14,7 +14,6 @@ public class FilterMenuPage extends AbstractPage{
 
     private static final Logger LOGGER = Logger.getLogger(FilterMenuPage.class);
 
-
     @FindBy(xpath = "//div[text()='Smart Home']")
     private WebElement smartHomeBtn;
 
@@ -66,7 +65,6 @@ public class FilterMenuPage extends AbstractPage{
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         clickButton(closeFilterMenuBtn,"closeFilterMenuBtn");
         new WebDriverWait(driver, Duration.ofSeconds(9)).until(ExpectedConditions.invisibilityOf(closeFilterMenuBtn));
-//        new WebDriverWait(driver, Duration.ofSeconds(9)).until(ExpectedConditions.invisibilityOf(filterBlock));
         return new HomePage(driver);
     }
 }
