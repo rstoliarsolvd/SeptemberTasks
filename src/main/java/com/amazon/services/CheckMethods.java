@@ -91,6 +91,10 @@ public class CheckMethods extends AbstractPage {
         return whereListContainWhatArrEl;
     }
 
+    /**
+     * Verify if page design is incorrect and no menuTab(visible)
+     * @return
+     */
     public boolean isWrongDesign() {
         return driver.findElements(By.xpath("//*[@id='nav-main']")).size() < 1;
     }

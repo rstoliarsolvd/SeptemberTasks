@@ -47,8 +47,6 @@ public class TodaysDealPage extends AbstractPage{
         LOGGER.info("Verifying that all goods have at least one feature of discount");
         List<String> discGoods = goodsTitleDiscountsList();
         List<String> discounts = new ArrayList<>(Arrays.asList("up", "%", "off", "under", "-"));
-
         return CheckMethods.isElementsPresentInList(discGoods,8,discounts);
     }
-
 }
