@@ -14,7 +14,7 @@ public class AbstractPage {
 
     private static final Logger LOGGER = Logger.getLogger(AbstractPage.class);
 
-    //    WebDriver driver;
+//        public WebDriver driver;
     public RemoteWebDriver driver = null;
 
     @FindBy(id = "nav-logo-sprites")
@@ -35,8 +35,5 @@ public class AbstractPage {
         upTab.clickButton(homeBtn, "homeBtn");
         return new HomePage(driver);
     }
-
-
-
 
 }
