@@ -10,6 +10,7 @@ import java.time.Duration;
 public class HomePage extends AbstractPage {
     private static final Logger LOGGER = Logger.getLogger(HomePage.class);
 
+
     public HomePage(RemoteWebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -20,5 +21,4 @@ public class HomePage extends AbstractPage {
         LOGGER.info("Verifying Home-page is opened");
         return driver.getCurrentUrl().equals(Const.HOME_URL) || driver.getCurrentUrl().equals(Const.HOME_LOGO_URL);
     }
-
 }
