@@ -7,6 +7,4 @@ public class Const {
     public static final String LOG4J_CONF_PATH = "src/main/resources/log4j.properties";
 //    public static final String LOCAL_HOST = "http://192.168.0.124:4444";
     public static final String LOCAL_HOST = "http://192.168.89.85:4444";
-
-
 }
