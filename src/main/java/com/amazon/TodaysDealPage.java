@@ -1,5 +1,6 @@
 package com.amazon;
 
+import com.amazon.constants.Const;
 import com.amazon.services.CheckMethods;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -20,6 +21,10 @@ public class TodaysDealPage extends AbstractPage{
 
     private static final Logger LOGGER = Logger.getLogger(TodaysDealPage.class);
 
+
+    @FindBy(xpath = "//h1")
+    private WebElement header;
+
     @FindBy(xpath = "//*[@class='Grid-module__gridDisplayGrid_2X7cDTY7pjoTwwvSRQbt9Y']//div[contains(@class,'DealGridItem-module__withoutActionButton_2OI8DAanWNRCagYDL2iIqN')]")
     private List<WebElement> discountGoods;
 
@@ -29,12 +34,13 @@ public class TodaysDealPage extends AbstractPage{
     }
 
     public boolean areGoodWithDealsPresent(){
-        String locatorGoodsDisc = "//*[@class='Grid-module__gridDisplayGrid_2X7cDTY7pjoTwwvSRQbt9Y']//div[contains(@class,'DealGridItem-module__withoutActionButton_2OI8DAanWNRCagYDL2iIqN')]";
-      return   driver.findElements(By.xpath(locatorGoodsDisc)).size()>1;
+        return   driver.findElements(By.xpath(Const.LOCATOR_GOODS_DISC)).size()>1;
     }
 
     public boolean ifTDPageIsOpen() {
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(discountGoods.get(1)));
+
+//        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(discountGoods.get(1))); //no Fail variant
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(header));//for fail screenshot
         return areGoodsHaveDiscount();
     }
 
