@@ -1,17 +1,19 @@
 package com.amazon;
 
-import com.amazon.services.LocationAlert;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class AmazonTest extends AbstractTest {
+    private static final Logger LOGGER = Logger.getLogger(AmazonTest.class);
+
 
     //    @Test(threadPoolSize = 3, invocationCount = 3, timeOut = 10000)
     @Test
     public void verifySignInFormAppearedTest() {
-        System.out.println("verifySignInFormAppearedTest Thread.currentThread().getId() = " + Thread.currentThread().getId());
+        LOGGER.info("verifySignInFormAppearedTest Thread.currentThread().getId() = " + Thread.currentThread().getId());
 
         RemoteWebDriver driver = driverT.get();
         refreshPageIfWrongDesign(driver);
@@ -29,7 +31,7 @@ public class AmazonTest extends AbstractTest {
 
     @Test(dataProvider = "searchItem")
     public void verifySearchFieldAndHomeBtn(String searchItem) {
-        System.out.println("verifySearchFieldAndHomeBtn Thread.currentThread().getId() = " + Thread.currentThread().getId());
+        LOGGER.info("verifySearchFieldAndHomeBtn Thread.currentThread().getId() = " + Thread.currentThread().getId());
 
         RemoteWebDriver driver = driverT.get();
         refreshPageIfWrongDesign(driver);
@@ -44,11 +46,11 @@ public class AmazonTest extends AbstractTest {
     //    @Test(retryAnalyzer = Retry.class)
     @Test
     public void verifyTodayDealsOption() {
-        System.out.println("verifyTodayDealsOption Thread.currentThread().getId() = " + Thread.currentThread().getId());
+        LOGGER.info("verifyTodayDealsOption Thread.currentThread().getId() = " + Thread.currentThread().getId());
+
 
         RemoteWebDriver driver = driverT.get();
         refreshPageIfWrongDesign(driver);
-
         LocationAlert lAlert = new LocationAlert(driver);
         lAlert.verifyAlert();
         MenuTab menuTab = new MenuTab(driver);
@@ -56,11 +58,12 @@ public class AmazonTest extends AbstractTest {
         Assert.assertTrue(todaysDealPage.ifTDPageIsOpen(), "No Today's Deals page is open");
         Assert.assertTrue(todaysDealPage.areGoodsHaveDiscount(), "Not All goods have discounts");
         menuTab.goHome(driver);
+
     }
 
     @Test
     public void verifyFilterTest() {
-        System.out.println("verifyFilterTest Thread.currentThread().getId() = " + Thread.currentThread().getId());
+        LOGGER.info("verifyFilterTest Thread.currentThread().getId() = " + Thread.currentThread().getId());
 
         String pet = "pet";
         RemoteWebDriver driver = driverT.get();
@@ -81,7 +84,7 @@ public class AmazonTest extends AbstractTest {
 
     @Test
     public void verifyFilterMenuCloseBtn() {
-        System.out.println("verifyFilterMenuCloseBtn Thread.currentThread().getId() = " + Thread.currentThread().getId());
+        LOGGER.info("verifyFilterMenuCloseBtn Thread.currentThread().getId() = " + Thread.currentThread().getId());
         RemoteWebDriver driver = driverT.get();
         refreshPageIfWrongDesign(driver);
 

@@ -35,8 +35,4 @@ public class AbstractPage {
         upTab.clickButton(homeBtn, "homeBtn");
         return new HomePage(driver);
     }
-
-
-
-
 }

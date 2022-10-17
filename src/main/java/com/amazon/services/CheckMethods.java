@@ -1,6 +1,7 @@
 package com.amazon.services;
 
 import com.amazon.AbstractPage;
+import com.amazon.constants.Const;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -11,9 +12,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class CheckMethods extends AbstractPage {
-
-    @FindBy(xpath = "//*[@id='nav-main']")
-    private static WebElement menuTab;
 
     public CheckMethods(RemoteWebDriver driver) {
         super(driver);
@@ -96,6 +94,6 @@ public class CheckMethods extends AbstractPage {
      * @return
      */
     public boolean isWrongDesign() {
-        return driver.findElements(By.xpath("//*[@id='nav-main']")).size() < 1;
+        return driver.findElements(By.xpath(Const.GOOD_DESIGN_LOCATOR)).size() < 1;
     }
 }

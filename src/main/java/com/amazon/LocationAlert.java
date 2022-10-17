@@ -1,6 +1,6 @@
-package com.amazon.services;
+package com.amazon;
 
-import com.amazon.AbstractPage;
+import com.amazon.constants.Const;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -33,8 +33,7 @@ public class LocationAlert extends AbstractPage {
 
     public boolean isLocAlertOpen(){
         LOGGER.info("Verifying ifLocation alert is Present. If Yes - then close it ");
-        String locationPopUpCSSLocator = ".a-section.glow-toaster.glow-toaster-theme-default.glow-toaster-slot-default.nav-coreFlyout.nav-flyout";
-        return driver.findElements(By.cssSelector(locationPopUpCSSLocator)).size() > 0;
+        return driver.findElements(By.cssSelector(Const.LOCATION_POP_UP_CSS_LOCATOR)).size() > 0;
     }
 
     public void closeLocPopUp(){

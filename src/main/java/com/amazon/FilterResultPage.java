@@ -17,7 +17,7 @@ public class FilterResultPage  extends AbstractPage{
     @FindBy(xpath = "//*[text()='Smart Pet | Smart Home']")
     private WebElement titleSmartPet;
 
-    @FindBy(xpath = "//*[contains(@class,'a-carousel-row-inner')]//*[contains(@class,'a-truncate-cut')]")
+    @FindBy(xpath = "//span[@class='a-truncate-cut']")
     private List<WebElement> goodsOfFilter;
 
     public FilterResultPage(RemoteWebDriver driver) {
