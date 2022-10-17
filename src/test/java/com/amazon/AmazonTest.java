@@ -94,4 +94,5 @@ public class AmazonTest extends AbstractTest {
         HomePage homePage = filterMenuPage.clickCloseBtn();
         Assert.assertTrue(homePage.isHomePageOpen(), "Home page is not open");
     }
+
 }

@@ -21,6 +21,7 @@ public class TodaysDealPage extends AbstractPage{
 
     private static final Logger LOGGER = Logger.getLogger(TodaysDealPage.class);
 
+
     @FindBy(xpath = "//h1")
     private WebElement header;
 
