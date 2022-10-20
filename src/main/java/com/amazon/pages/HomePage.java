@@ -1,4 +1,4 @@
-package com.amazon;
+package com.amazon.pages;
 
 import com.amazon.constants.Const;
 import org.apache.log4j.Logger;

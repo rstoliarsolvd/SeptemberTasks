@@ -1,18 +1,15 @@
 package com.amazon.services;
 
-import com.amazon.AbstractPage;
+import com.amazon.pages.AbstractPage1;
 import com.amazon.constants.Const;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 import java.util.Locale;
 
-public class CheckMethods extends AbstractPage {
+public class CheckMethods extends AbstractPage1 {
 
     public CheckMethods(RemoteWebDriver driver) {
         super(driver);

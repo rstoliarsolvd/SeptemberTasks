@@ -1,5 +1,7 @@
 package com.amazon;
 
+import com.amazon.pages.*;
+import com.amazon.utils.RetryTestAttempts;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
@@ -39,11 +41,11 @@ public class AmazonTest extends AbstractTest {
         UpTab upTab = new UpTab(driver);
         ResultsPage resultsPage = upTab.findItem(searchItem);
         Assert.assertTrue(resultsPage.areTitlesContainsItem(searchItem), "Not all goods titles contains searched items");
-        HomePage homePage = upTab.goHome(driver);
+        HomePage homePage = upTab.goHome();
         Assert.assertTrue(homePage.isHomePageOpen(), "Home page is not opened");
     }
 
-    //    @Test(retryAnalyzer = Retry.class)
+//        @Test(retryAnalyzer = RetryTestAttempts.class)
     @Test
     public void verifyTodayDealsOption() {
         LOGGER.info("verifyTodayDealsOption Thread.currentThread().getId() = " + Thread.currentThread().getId());
@@ -57,7 +59,8 @@ public class AmazonTest extends AbstractTest {
         TodaysDealPage todaysDealPage = menuTab.clickTodaysDealsBtn();
         Assert.assertTrue(todaysDealPage.ifTDPageIsOpen(), "No Today's Deals page is open");
         Assert.assertTrue(todaysDealPage.areGoodsHaveDiscount(), "Not All goods have discounts");
-        menuTab.goHome(driver);
+        UpTab upTab = new UpTab(driver);
+        upTab.goHome();;
 
     }
 
@@ -79,7 +82,8 @@ public class AmazonTest extends AbstractTest {
         FilterResultPage filterResultPage = filterMenuPage.clickPetBtn();
         Assert.assertTrue(filterResultPage.isTitleOnFilterResultPageWithPet(), " No 'Pet' title is displayed");
         Assert.assertTrue(filterResultPage.areAllGoodsTitleContainsSearchItem(pet), "No 'Pet' in title on filter result page present");
-        filterResultPage.goHome(driver);
+        UpTab upTab = new UpTab(driver);
+        upTab.goHome();
     }
 
     @Test

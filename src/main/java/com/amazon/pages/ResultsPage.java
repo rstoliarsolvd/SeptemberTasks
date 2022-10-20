@@ -1,6 +1,8 @@
-package com.amazon;
+package com.amazon.pages;
 
 import com.amazon.services.CheckMethods;
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -18,7 +20,7 @@ public class ResultsPage extends AbstractPage {
     private static final Logger LOGGER = Logger.getLogger(ResultsPage.class);
 
     @FindBy(xpath = "//*[contains(@class, 's-main-slot')]//*[contains(@class, 's-title-instructions-style')]")
-    private List<WebElement> goodsResult;
+    private List<ExtendedWebElement> goodsResult;
 
     public ResultsPage(RemoteWebDriver driver) {
         super(driver);
@@ -26,10 +28,10 @@ public class ResultsPage extends AbstractPage {
     }
 
     public List<String> goodsTitles() {
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(goodsResult.get(1)));
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf((WebElement) goodsResult.get(1)));
 
         List<String> titles = goodsResult.stream()
-                .map(WebElement::getText)
+                .map(ExtendedWebElement::getText)
                 .collect(Collectors.toList());
         return titles;
     }

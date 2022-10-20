@@ -1,9 +1,9 @@
-package com.amazon;
+package com.amazon.utils;
 
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 
-public class Retry implements IRetryAnalyzer {
+public class RetryTestAttempts implements IRetryAnalyzer {
 
     private int actualRetry = 0;
     private static final int MAX_RETRY = 3;

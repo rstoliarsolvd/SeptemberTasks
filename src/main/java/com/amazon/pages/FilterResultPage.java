@@ -1,8 +1,9 @@
-package com.amazon;
+package com.amazon.pages;
 
 import com.amazon.services.CheckMethods;
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,15 +11,15 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FilterResultPage  extends AbstractPage{
+public class FilterResultPage  extends AbstractPage {
 
     public static final Logger LOGGER = Logger.getLogger(FilterResultPage.class);
 
     @FindBy(xpath = "//*[text()='Smart Pet | Smart Home']")
-    private WebElement titleSmartPet;
+    private ExtendedWebElement titleSmartPet;
 
     @FindBy(xpath = "//span[@class='a-truncate-cut']")
-    private List<WebElement> goodsOfFilter;
+    private List<ExtendedWebElement> goodsOfFilter;
 
     public FilterResultPage(RemoteWebDriver driver) {
         super(driver);
@@ -27,12 +28,12 @@ public class FilterResultPage  extends AbstractPage{
 
     public boolean isTitleOnFilterResultPageWithPet() {
         LOGGER.info("Verifying if title with 'Smart Home' and 'Pet' Present. ");
-        return titleSmartPet.isDisplayed();
+        return titleSmartPet.isElementPresent();//по логу сделать понятным результат ( в логгер добавить резудльтат)
     }
 
     public List<String> getGoodsTitlesList(){
         return goodsOfFilter.stream()
-                .map(WebElement::getText)
+                .map(ExtendedWebElement::getText)
                 .collect(Collectors.toList());
     }
 
