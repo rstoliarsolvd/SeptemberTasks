@@ -22,6 +22,7 @@ public class TodaysDealPage extends AbstractPage {
     public static final String LOCATOR_GOODS_DISC = "//*[@class='Grid-module__gridDisplayGrid_2X7cDTY7pjoTwwvSRQbt9Y']//div[contains(@class,'DealGridItem-module__withoutActionButton_2OI8DAanWNRCagYDL2iIqN')]";
 
 
+
     @FindBy(xpath = "//h1")
     private WebElement header;
 

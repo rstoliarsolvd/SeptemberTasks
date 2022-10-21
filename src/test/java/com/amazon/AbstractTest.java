@@ -24,18 +24,27 @@ import java.util.concurrent.TimeUnit;
 
 public class AbstractTest {
 
-    protected static ThreadLocal<RemoteWebDriver> driverT = new ThreadLocal<>();  //For Selenium Standalone server //for parallel ran (multiThread)
+    /**
+     * For Selenium Standalone server //for parallel ran (multiThread)
+     */
+    protected static ThreadLocal<RemoteWebDriver> driverT = new ThreadLocal<>();
 
-//    WebDriver driver;  //For Selenium server
+    /**
+     * For Selenium server
+     */
+//    public WebDriver driver;
 
     private static final Logger LOGGER = Logger.getLogger(AmazonTest.class);
 
     @Parameters({"browser"})
     @BeforeMethod
     protected static void setupDriver(String browser) throws Exception {
+
         PropertyConfigurator.configure(Const.LOG4J_CONF_PATH);
 
-//For Selenium Standalone server
+/**
+ * For Selenium Standalone server
+ */
         RemoteWebDriver driver = null;
         DesiredCapabilities cap = new DesiredCapabilities();
 
@@ -59,9 +68,11 @@ public class AbstractTest {
         }
         driver = new RemoteWebDriver(new URL(Const.LOCAL_HOST), cap);
 
-//For Selenium Standalone server and for Selenium  server
-//        System.setProperty("webdriver.chrome.driver", "/Users/rstoliar/Downloads/chromedriver 2");
-//        driver = new ChromeDriver();
+/**
+ * For Selenium Standalone server and for Selenium  server
+ */
+//        System.setProperty("webdriver.chrome.driver", "/Users/rstoliar/IdeaProjects/chromedriver");
+//        WebDriver driver = new ChromeDriver();
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(Const.HOME_URL);
@@ -110,6 +121,7 @@ public class AbstractTest {
         }
     }
 
+
     /**
      * This block is just for one thread standalone use
      */
@@ -126,6 +138,7 @@ public class AbstractTest {
 //        }
 //        return driver;
 //    }
+
     public void refreshPageIfWrongDesign(RemoteWebDriver driver) {
         CheckMethods checkMethods = new CheckMethods(driver);
         if (checkMethods.isWrongDesign()) {
