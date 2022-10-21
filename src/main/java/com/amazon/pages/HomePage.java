@@ -17,21 +17,29 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//div[@id='desktop-banner-stripe']")
     private WebElement desktopBannerStripe;
 
+    @FindBy(xpath = "//div[@id='gw-card-layout']")
+    private WebElement desktopCardLayout;
+
     public HomePage(RemoteWebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
     public boolean isHomePageOpen() {
-        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOf(desktopBannerStripe));
+//        new WebDriverWait(driver, Duration.ofSeconds(6)).until(ExpectedConditions.visibilityOf(desktopBannerStripe));
+        FilterMenuPage filterMenuPage = new FilterMenuPage(driver);
+        new WebDriverWait(driver, Duration.ofSeconds(6))
+                .until(ExpectedConditions.and(
+                        ExpectedConditions.visibilityOf(desktopCardLayout),
+                        ExpectedConditions.invisibilityOf(filterMenuPage.getCloseFilterMenuBtn())));
         boolean isHomePageOpened = driver.getCurrentUrl().equals(Const.HOME_URL)
                 || driver.getCurrentUrl().equals(Const.HOME_LOGO_URL)
-                || desktopBannerStripe.isDisplayed();
+                || desktopCardLayout.isDisplayed();
         LOGGER.info("Verifying Home-page is opened: " + isHomePageOpened);
         return isHomePageOpened;
     }
 
-    public WebElement getDesktopBannerStripe() {
-        return desktopBannerStripe;
+    public WebElement getHomePageWebElement() {
+        return desktopCardLayout;
     }
 }

@@ -54,7 +54,7 @@ public class UpTab extends AbstractPage {
     public HomePage clickHomeBtn() {
         clickButton(homeBtn, "homeBtn");
         HomePage homePage = new HomePage(driver);
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(homePage.getDesktopBannerStripe()));
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(homePage.getHomePageWebElement()));
         LOGGER.info("HomePage is opened : " + homePage.isHomePageOpen());
         return homePage;
     }

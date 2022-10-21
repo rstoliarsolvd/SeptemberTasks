@@ -44,7 +44,7 @@ public class SignInFormPage extends AbstractPage {
             clickButton(homeBtn1, "homeBtn1");
         }
         HomePage homePage = new HomePage(driver);
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(homePage.getDesktopBannerStripe()));
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(homePage.getHomePageWebElement()));
         LOGGER.info("click Home-Btn. And HomePage is open - " + homePage.isHomePageOpen());
 
     }

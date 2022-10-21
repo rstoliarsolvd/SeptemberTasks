@@ -46,8 +46,8 @@ public class TodaysDealPage extends AbstractPage {
 
     public boolean ifTDPageIsOpen() {
 
-//        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(discountGoods.get(1))); //no Fail variant
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(header));//for fail screenshot
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(discountGoods.get(1))); //no Fail variant
+//        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(header));//for fail screenshot
         return areGoodsHaveDiscount();
     }
 

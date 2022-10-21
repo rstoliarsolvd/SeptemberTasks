@@ -70,4 +70,8 @@ public class FilterMenuPage extends AbstractPage {
         LOGGER.info("closeFilterMenuBtn disappeared after clicking on it - " + !isCloseFilterMenuBtnDisplayed);
         return new HomePage(driver);
     }
+
+    public WebElement getCloseFilterMenuBtn(){
+        return closeFilterMenuBtn;
+    }
 }
