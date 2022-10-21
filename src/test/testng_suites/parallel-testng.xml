@@ -1,6 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Parallel-test-method Suite" parallel="methods" thread-count="5">
+<!--<suite name="Parallel-test-method Suite" parallel="methods" thread-count="3">-->
+<suite name="Parallel-test-method Suite" parallel="tests" thread-count="3">
     <!--    <test verbose="2" preserve-order="true" name="/Users/rstoliar/IdeaProjects/SeptemberTasks/src/main/java/amazon">-->
 
     <test name="Test-method test Chrome">

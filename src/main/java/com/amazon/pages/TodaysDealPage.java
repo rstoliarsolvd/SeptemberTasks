@@ -1,6 +1,5 @@
-package com.amazon;
+package com.amazon.pages;
 
-import com.amazon.constants.Const;
 import com.amazon.services.CheckMethods;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -17,9 +16,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TodaysDealPage extends AbstractPage{
+public class TodaysDealPage extends AbstractPage {
 
     private static final Logger LOGGER = Logger.getLogger(TodaysDealPage.class);
+    public static final String LOCATOR_GOODS_DISC = "//*[@class='Grid-module__gridDisplayGrid_2X7cDTY7pjoTwwvSRQbt9Y']//div[contains(@class,'DealGridItem-module__withoutActionButton_2OI8DAanWNRCagYDL2iIqN')]";
+
 
     @FindBy(xpath = "//h1")
     private WebElement header;
@@ -27,13 +28,19 @@ public class TodaysDealPage extends AbstractPage{
     @FindBy(xpath = "//*[@class='Grid-module__gridDisplayGrid_2X7cDTY7pjoTwwvSRQbt9Y']//div[contains(@class,'DealGridItem-module__withoutActionButton_2OI8DAanWNRCagYDL2iIqN')]")
     private List<WebElement> discountGoods;
 
+    @FindBy(xpath = "//div[@aria-label='Watch now']")
+    private WebElement watchNow;
+
+
     public TodaysDealPage(RemoteWebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public boolean areGoodWithDealsPresent(){
-        return   driver.findElements(By.xpath(Const.LOCATOR_GOODS_DISC)).size()>1;
+    public boolean areGoodWithDealsPresent() {
+        boolean areGoodDealsPresent = driver.findElements(By.xpath(LOCATOR_GOODS_DISC)).size() > 1;
+        LOGGER.info("Verify if goods with deals discounts present on the page: " + areGoodDealsPresent);
+        return areGoodDealsPresent;
     }
 
     public boolean ifTDPageIsOpen() {
@@ -43,16 +50,17 @@ public class TodaysDealPage extends AbstractPage{
         return areGoodsHaveDiscount();
     }
 
-    public List<String> goodsTitleDiscountsList(){
-        return   discountGoods.stream()
+    public List<String> goodsTitleDiscountsList() {
+        return discountGoods.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
 
-    public boolean areGoodsHaveDiscount(){
-        LOGGER.info("Verifying that all goods have at least one feature of discount");
+    public boolean areGoodsHaveDiscount() {
         List<String> discGoods = goodsTitleDiscountsList();
         List<String> discounts = new ArrayList<>(Arrays.asList("up", "%", "off", "under", "-"));
-        return CheckMethods.isElementsPresentInList(discGoods,8,discounts);
+        boolean areTheseGoodsOnDiscounts = CheckMethods.isElementsPresentInList(discGoods, 8, discounts);
+        LOGGER.info("Verifying that all goods have at least one feature of discount: " + areTheseGoodsOnDiscounts);
+        return areTheseGoodsOnDiscounts;
     }
 }

@@ -1,4 +1,4 @@
-package com.amazon;
+package com.amazon.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;

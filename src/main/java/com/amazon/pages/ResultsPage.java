@@ -1,4 +1,4 @@
-package com.amazon;
+package com.amazon.pages;
 
 import com.amazon.services.CheckMethods;
 import org.apache.log4j.Logger;
@@ -35,9 +35,10 @@ public class ResultsPage extends AbstractPage {
     }
 
     public boolean areTitlesContainsItem(String input) {
-        String [] str = input.split(" ");
-        LOGGER.info("Verifying in title of all goods Present -- " + input);
+        String[] str = input.split(" ");
         List<String> titles = goodsTitles();
-        return  CheckMethods.areAllElementsContainAllElements(titles,str);
+        boolean areElsContainsEls = CheckMethods.areAllElementsContainAllElements(titles, str);
+        LOGGER.info("Verifying all goods have in their title - " + input + " : " + areElsContainsEls);
+        return areElsContainsEls;
     }
 }

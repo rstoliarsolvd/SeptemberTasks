@@ -1,5 +1,7 @@
 package com.amazon;
 
+import com.amazon.pages.*;
+import com.amazon.services.GoTo;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
@@ -14,6 +16,7 @@ public class AmazonTest extends AbstractTest {
     @Test
     public void verifySignInFormAppearedTest() {
         LOGGER.info("verifySignInFormAppearedTest Thread.currentThread().getId() = " + Thread.currentThread().getId());
+        LOGGER.info("This test is running on browser - " + driverT.get().getCapabilities().getBrowserName());
 
         RemoteWebDriver driver = driverT.get();
         refreshPageIfWrongDesign(driver);
@@ -32,6 +35,7 @@ public class AmazonTest extends AbstractTest {
     @Test(dataProvider = "searchItem")
     public void verifySearchFieldAndHomeBtn(String searchItem) {
         LOGGER.info("verifySearchFieldAndHomeBtn Thread.currentThread().getId() = " + Thread.currentThread().getId());
+        LOGGER.info("This test is running on browser - " + driverT.get().getCapabilities().getBrowserName());
 
         RemoteWebDriver driver = driverT.get();
         refreshPageIfWrongDesign(driver);
@@ -39,31 +43,33 @@ public class AmazonTest extends AbstractTest {
         UpTab upTab = new UpTab(driver);
         ResultsPage resultsPage = upTab.findItem(searchItem);
         Assert.assertTrue(resultsPage.areTitlesContainsItem(searchItem), "Not all goods titles contains searched items");
-        HomePage homePage = upTab.goHome(driver);
+        HomePage homePage = GoTo.goHome(driver);
         Assert.assertTrue(homePage.isHomePageOpen(), "Home page is not opened");
     }
 
-    //    @Test(retryAnalyzer = Retry.class)
+    //    @Test(retryAnalyzer = RetryTestRunAttempts.class)
     @Test
     public void verifyTodayDealsOption() {
         LOGGER.info("verifyTodayDealsOption Thread.currentThread().getId() = " + Thread.currentThread().getId());
-
+        LOGGER.info("This test is running on browser - " + driverT.get().getCapabilities().getBrowserName());
 
         RemoteWebDriver driver = driverT.get();
         refreshPageIfWrongDesign(driver);
+
         LocationAlert lAlert = new LocationAlert(driver);
         lAlert.verifyAlert();
         MenuTab menuTab = new MenuTab(driver);
         TodaysDealPage todaysDealPage = menuTab.clickTodaysDealsBtn();
         Assert.assertTrue(todaysDealPage.ifTDPageIsOpen(), "No Today's Deals page is open");
         Assert.assertTrue(todaysDealPage.areGoodsHaveDiscount(), "Not All goods have discounts");
-        menuTab.goHome(driver);
+        GoTo.goHome(driver);
 
     }
 
     @Test
     public void verifyFilterTest() {
         LOGGER.info("verifyFilterTest Thread.currentThread().getId() = " + Thread.currentThread().getId());
+        LOGGER.info("This test is running on browser - " + driverT.get().getCapabilities().getBrowserName());
 
         String pet = "pet";
         RemoteWebDriver driver = driverT.get();
@@ -79,12 +85,14 @@ public class AmazonTest extends AbstractTest {
         FilterResultPage filterResultPage = filterMenuPage.clickPetBtn();
         Assert.assertTrue(filterResultPage.isTitleOnFilterResultPageWithPet(), " No 'Pet' title is displayed");
         Assert.assertTrue(filterResultPage.areAllGoodsTitleContainsSearchItem(pet), "No 'Pet' in title on filter result page present");
-        filterResultPage.goHome(driver);
+        GoTo.goHome(driver);
     }
 
     @Test
     public void verifyFilterMenuCloseBtn() {
         LOGGER.info("verifyFilterMenuCloseBtn Thread.currentThread().getId() = " + Thread.currentThread().getId());
+        LOGGER.info("This test is running on browser - " + driverT.get().getCapabilities().getBrowserName());
+
         RemoteWebDriver driver = driverT.get();
         refreshPageIfWrongDesign(driver);
 
