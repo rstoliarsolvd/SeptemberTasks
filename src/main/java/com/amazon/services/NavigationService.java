@@ -1,17 +1,10 @@
 package com.amazon.services;
 
-import com.amazon.pages.AbstractPage;
 import com.amazon.pages.HomePage;
 import com.amazon.pages.UpTab;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.PageFactory;
 
-public class GoTo extends AbstractPage {
-
-    public GoTo(RemoteWebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
-    }
+public class NavigationService {
 
     /**
      * Back to HomePage

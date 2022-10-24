@@ -1,7 +1,7 @@
 package com.amazon;
 
 import com.amazon.pages.*;
-import com.amazon.services.GoTo;
+import com.amazon.services.NavigationService;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
@@ -43,7 +43,7 @@ public class AmazonTest extends AbstractTest {
         UpTab upTab = new UpTab(driver);
         ResultsPage resultsPage = upTab.findItem(searchItem);
         Assert.assertTrue(resultsPage.areTitlesContainsItem(searchItem), "Not all goods titles contains searched items");
-        HomePage homePage = GoTo.goHome(driver);
+        HomePage homePage = NavigationService.goHome(driver);
         Assert.assertTrue(homePage.isHomePageOpen(), "Home page is not opened");
     }
 
@@ -62,7 +62,7 @@ public class AmazonTest extends AbstractTest {
         TodaysDealPage todaysDealPage = menuTab.clickTodaysDealsBtn();
         Assert.assertTrue(todaysDealPage.ifTDPageIsOpen(), "No Today's Deals page is open");
         Assert.assertTrue(todaysDealPage.areGoodsHaveDiscount(), "Not All goods have discounts");
-        GoTo.goHome(driver);
+        NavigationService.goHome(driver);
 
     }
 
@@ -85,7 +85,7 @@ public class AmazonTest extends AbstractTest {
         FilterResultPage filterResultPage = filterMenuPage.clickPetBtn();
         Assert.assertTrue(filterResultPage.isTitleOnFilterResultPageWithPet(), " No 'Pet' title is displayed");
         Assert.assertTrue(filterResultPage.areAllGoodsTitleContainsSearchItem(pet), "No 'Pet' in title on filter result page present");
-        GoTo.goHome(driver);
+        NavigationService.goHome(driver);
     }
 
     @Test

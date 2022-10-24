@@ -26,7 +26,6 @@ public class HomePage extends AbstractPage {
     }
 
     public boolean isHomePageOpen() {
-//        new WebDriverWait(driver, Duration.ofSeconds(6)).until(ExpectedConditions.visibilityOf(desktopBannerStripe));
         FilterMenuPage filterMenuPage = new FilterMenuPage(driver);
         new WebDriverWait(driver, Duration.ofSeconds(6))
                 .until(ExpectedConditions.and(

@@ -1,6 +1,6 @@
 package com.amazon.pages;
 
-import com.amazon.services.GoTo;
+import com.amazon.services.NavigationService;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -16,7 +16,7 @@ public class AbstractPage {
 
     private static final Logger LOGGER = Logger.getLogger(AbstractPage.class);
 
-    //    WebDriver driver;
+    //    WebDriver driver; // this is needed for starting test in one (chrome) browser in one thread
     public RemoteWebDriver driver = null;
 
     @FindBy(xpath = "//span[@class='a-color-state a-text-bold']")
@@ -50,6 +50,6 @@ public class AbstractPage {
     }
 
     public void goToHomePage(RemoteWebDriver driver) {
-        GoTo.goHome(driver);
+        NavigationService.goHome(driver);
     }
 }

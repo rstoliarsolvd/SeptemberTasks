@@ -1,6 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
+<!--        variant to start methods in different threads-->
 <!--<suite name="Parallel-test-method Suite" parallel="methods" thread-count="1">-->
+
+<!--        variant to start tests in different threads-->
 <suite name="Parallel-test-method Suite" parallel="tests" thread-count="3">
     <!--    <test verbose="2" preserve-order="true" name="/Users/rstoliar/IdeaProjects/SeptemberTasks/src/main/java/amazon">-->
 

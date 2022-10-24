@@ -22,7 +22,6 @@ public class TodaysDealPage extends AbstractPage {
     public static final String LOCATOR_GOODS_DISC = "//*[@class='Grid-module__gridDisplayGrid_2X7cDTY7pjoTwwvSRQbt9Y']//div[contains(@class,'DealGridItem-module__withoutActionButton_2OI8DAanWNRCagYDL2iIqN')]";
 
 
-
     @FindBy(xpath = "//h1")
     private WebElement header;
 
@@ -45,9 +44,15 @@ public class TodaysDealPage extends AbstractPage {
     }
 
     public boolean ifTDPageIsOpen() {
+        /**
+         * next for no Fail variant
+         */
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(discountGoods.get(1)));
 
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(discountGoods.get(1))); //no Fail variant
-//        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(header));//for fail screenshot
+        /**
+         * next for fail screenshot
+         */
+//        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(header));
         return areGoodsHaveDiscount();
     }
 

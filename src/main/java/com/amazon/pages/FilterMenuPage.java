@@ -23,7 +23,7 @@ public class FilterMenuPage extends AbstractPage {
     @FindBy(xpath = "//div[@class ='nav-sprite hmenu-close-icon']")
     private WebElement closeFilterMenuBtn;
 
-    //    @FindBy(xpath = "//*[@id='hmenu-content']")
+    //    @FindBy(xpath = "//*[@id='hmenu-content']") // the same locator but upper and wider (needed depends on page design)
     @FindBy(xpath = "//ul[@class='hmenu hmenu-visible']")
     private WebElement filterBlock;
 
