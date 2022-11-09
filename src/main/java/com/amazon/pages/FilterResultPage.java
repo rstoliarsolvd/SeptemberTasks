@@ -1,4 +1,4 @@
-package com.amazon;
+package com.amazon.pages;
 
 import com.amazon.services.CheckMethods;
 import org.apache.log4j.Logger;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FilterResultPage  extends AbstractPage{
+public class FilterResultPage extends AbstractPage {
 
     public static final Logger LOGGER = Logger.getLogger(FilterResultPage.class);
 
@@ -26,19 +26,21 @@ public class FilterResultPage  extends AbstractPage{
     }
 
     public boolean isTitleOnFilterResultPageWithPet() {
-        LOGGER.info("Verifying if title with 'Smart Home' and 'Pet' Present. ");
-        return titleSmartPet.isDisplayed();
+        boolean isTitleSmartPetDisplayed = titleSmartPet.isDisplayed();
+        LOGGER.info("Verifying if title with 'Smart Home' and 'Pet' Present. : " + isTitleSmartPetDisplayed);
+        return isTitleSmartPetDisplayed;
     }
 
-    public List<String> getGoodsTitlesList(){
+    public List<String> getGoodsTitlesList() {
         return goodsOfFilter.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
 
-    public  boolean areAllGoodsTitleContainsSearchItem(String pet){
-        LOGGER.info("Verifying " + pet + " Present in all goods ");
+    public boolean areAllGoodsTitleContainsSearchItem(String pet) {
         List<String> goodsText = getGoodsTitlesList();
-        return CheckMethods.isStringPresentInList(goodsText,pet);
+        boolean isStringPetPresentInGoodsList = CheckMethods.isStringPresentInList(goodsText, pet);
+        LOGGER.info("Verifying if " + pet + " Present in all goods : " + isStringPetPresentInGoodsList);
+        return isStringPetPresentInGoodsList;
     }
 }

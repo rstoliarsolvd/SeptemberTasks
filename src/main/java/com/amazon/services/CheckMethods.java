@@ -1,18 +1,16 @@
 package com.amazon.services;
 
-import com.amazon.AbstractPage;
-import com.amazon.constants.Const;
+import com.amazon.pages.AbstractPage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 import java.util.Locale;
 
 public class CheckMethods extends AbstractPage {
+
+    public static final String GOOD_DESIGN_LOCATOR = "//*[@id='nav-main']";
 
     public CheckMethods(RemoteWebDriver driver) {
         super(driver);
@@ -92,9 +90,10 @@ public class CheckMethods extends AbstractPage {
 
     /**
      * Verify if page design is incorrect and no menuTab(visible)
+     *
      * @return
      */
     public boolean isWrongDesign() {
-        return driver.findElements(By.xpath(Const.GOOD_DESIGN_LOCATOR)).size() < 1;
+        return driver.findElements(By.xpath(GOOD_DESIGN_LOCATOR)).size() < 1;
     }
 }

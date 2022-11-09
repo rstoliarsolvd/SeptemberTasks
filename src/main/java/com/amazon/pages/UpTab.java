@@ -1,8 +1,6 @@
-package com.amazon;
+package com.amazon.pages;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -25,6 +23,9 @@ public class UpTab extends AbstractPage {
     @FindBy(xpath = "//div[@class='a-box-inner a-padding-extra-large']")
     private WebElement signInBlock;
 
+    @FindBy(id = "nav-logo-sprites")
+    private WebElement homeBtn;
+
     public UpTab(RemoteWebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -37,17 +38,25 @@ public class UpTab extends AbstractPage {
     }
 
     public void clickSearchField() {
-        clickButton(searchField,"searchField");
+        clickButton(searchField, "searchField");
     }
 
     public ResultsPage inputTextInSearchField(String searchItem) {
-        searchField.sendKeys(searchItem, Keys.ENTER);
-        LOGGER.info("key "+ searchItem + " is inputed in search field and entered");
+        sendKeysMethod(searchField, searchItem);
         return new ResultsPage(driver);
     }
 
-    public ResultsPage findItem(String searchItem){
+    public ResultsPage findItem(String searchItem) {
         clickSearchField();
-       return inputTextInSearchField(searchItem);
+        return inputTextInSearchField(searchItem);
     }
+
+    public HomePage clickHomeBtn() {
+        clickButton(homeBtn, "homeBtn");
+        HomePage homePage = new HomePage(driver);
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(homePage.getHomePageWebElement()));
+        LOGGER.info("HomePage is opened : " + homePage.isHomePageOpen());
+        return homePage;
+    }
+
 }
